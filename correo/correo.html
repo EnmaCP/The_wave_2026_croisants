@@ -131,10 +131,11 @@
         
         function renderMessages(filterCategory = 'all') {
             messageList.innerHTML = '';
-            let filteredEmails = emails;
+            const deletedIds = JSON.parse(localStorage.getItem('deletedEmails')) || [];
+            let filteredEmails = emails.filter(e => !deletedIds.includes(e.id));
             
             if (filterCategory !== 'all') {
-                filteredEmails = emails.filter(e => e.category === filterCategory);
+                filteredEmails = filteredEmails.filter(e => e.category === filterCategory);
             }
             
             filteredEmails.forEach(email => {

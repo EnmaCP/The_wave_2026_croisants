@@ -221,9 +221,15 @@
     <!-- Security Modal -->
     <style>
         @keyframes spin-hourglass {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
+
         .hourglass-spin {
             animation: spin-hourglass 1.5s linear infinite;
         }
@@ -233,38 +239,50 @@
             <h3 class="security-modal-title" style="margin-bottom: 1.5rem;">
                 <span class="material-symbols-outlined">warning</span> Security Check
             </h3>
-            
+
             <div id="sec-content-default">
                 <p class="security-modal-text">
-                    This email is marked as possible spam. To continue to the attachment or link, please verify the sender's email address by typing it below (Hint: check sender details).
+                    This email is marked as possible spam. To continue to the attachment or link, please verify the
+                    sender's email address by typing it below (Hint: check sender details).
                 </p>
-                <input type="email" id="sec-email-input" class="security-modal-input" placeholder="Sender's exact email address..." autocomplete="off"/>
-                <p id="sec-error-msg" class="security-modal-error">Incorrect email address. Please look at the sender details and try again.</p>
-                
-                <div class="security-modal-actions" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-                    <button id="sec-btn-ai-check" class="btn-action-secondary" style="display: none; justify-content: center; width: 100%; border-color: var(--primary); color: var(--primary);">
-                        <span class="material-symbols-outlined" data-icon="robot_2">robot_2</span> Comprobar fiabilidad del correo
+                <input type="email" id="sec-email-input" class="security-modal-input"
+                    placeholder="Sender's exact email address..." autocomplete="off" />
+                <p id="sec-error-msg" class="security-modal-error">Incorrect email address. Please look at the sender
+                    details and try again.</p>
+
+                <div class="security-modal-actions"
+                    style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                    <button id="sec-btn-ai-check" class="btn-action-secondary"
+                        style="display: none; justify-content: center; width: 100%; border-color: var(--primary); color: var(--primary);">
+                        <span class="material-symbols-outlined" data-icon="robot_2">robot_2</span> Comprobar fiabilidad
+                        del correo
                     </button>
-                    
+
                     <div style="display: flex; gap: 1rem; width: 100%; justify-content: flex-end;">
-                        <button id="sec-btn-cancel" class="btn-action-secondary" style="padding: 0.5rem 1rem;">Cancel</button>
-                        <button id="sec-btn-verify" class="btn-action-primary" style="padding: 0.5rem 1rem;">Verify</button>
+                        <button id="sec-btn-cancel" class="btn-action-secondary"
+                            style="padding: 0.5rem 1rem;">Cancel</button>
+                        <button id="sec-btn-verify" class="btn-action-primary"
+                            style="padding: 0.5rem 1rem;">Verify</button>
                     </div>
                 </div>
             </div>
 
             <!-- AI Checking State -->
             <div id="sec-content-loading" style="display: none; text-align: center; padding: 2rem 0;">
-                <span class="material-symbols-outlined hourglass-spin" style="font-size: 3rem; color: var(--primary);">hourglass_empty</span>
+                <span class="material-symbols-outlined hourglass-spin"
+                    style="font-size: 3rem; color: var(--primary);">hourglass_empty</span>
                 <h4 style="margin-top: 1rem; color: var(--on-surface);">Analizando remitente...</h4>
-                <p style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.5rem;">Nuestra IA está buscando información o posibles reportes sobre este correo en la red.</p>
+                <p style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.5rem;">Nuestra IA está
+                    buscando información o posibles reportes sobre este correo en la red.</p>
             </div>
 
             <!-- AI Result State -->
             <div id="sec-content-result" style="display: none; text-align: center; padding: 1rem 0;">
                 <span id="sec-result-icon" class="material-symbols-outlined" style="font-size: 3.5rem;"></span>
                 <h4 id="sec-result-title" style="margin-top: 1rem; font-size: 1.25rem; font-weight: 800;"></h4>
-                <p id="sec-result-desc" style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.5rem; line-height: 1.5;"></p>
+                <p id="sec-result-desc"
+                    style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.5rem; line-height: 1.5;">
+                </p>
                 <div style="margin-top: 1.5rem; justify-content: center; display: flex;">
                     <button id="sec-btn-close-result" class="btn-action-secondary">Cerrar</button>
                 </div>
@@ -272,7 +290,7 @@
 
         </div>
     </div>
-    
+
     <script src="../emails.js"></script>
     <script>
         // Database of emails is now loaded from ../emails.js
@@ -339,7 +357,7 @@
         const modal = document.getElementById('security-modal');
         const inputField = document.getElementById('sec-email-input');
         const errorMsg = document.getElementById('sec-error-msg');
-        
+
         const contentDefault = document.getElementById('sec-content-default');
         const contentLoading = document.getElementById('sec-content-loading');
         const contentResult = document.getElementById('sec-content-result');
@@ -349,6 +367,7 @@
         const resultDesc = document.getElementById('sec-result-desc');
 
         let pendingAction = null;
+        let isScamConfirmed = false;
 
         function showSecurityModal(actionCb) {
             if (email.category !== 'spam') {
@@ -356,14 +375,15 @@
                 return;
             }
             pendingAction = actionCb;
+            isScamConfirmed = false;
             errorMsg.style.display = 'none';
             btnAiCheck.style.display = 'none';
             inputField.value = '';
-            
+
             contentDefault.style.display = 'block';
             contentLoading.style.display = 'none';
             contentResult.style.display = 'none';
-            
+
             modal.style.display = 'flex';
             setTimeout(() => inputField.focus(), 100);
         }
@@ -371,6 +391,9 @@
         function closeSecurityModal() {
             modal.style.display = 'none';
             pendingAction = null;
+            if (isScamConfirmed) {
+                deleteCurrentEmail();
+            }
         }
 
         document.getElementById('sec-btn-close-result').addEventListener('click', closeSecurityModal);
@@ -403,12 +426,12 @@
         btnAiCheck.addEventListener('click', () => {
             contentDefault.style.display = 'none';
             contentLoading.style.display = 'block';
-            
+
             // Simulate 2s loading
             setTimeout(() => {
                 contentLoading.style.display = 'none';
                 contentResult.style.display = 'block';
-                
+
                 const isReliable = Math.random() > 0.5; // 50% chance
                 if (isReliable) {
                     resultIcon.innerText = "check_circle";
@@ -416,12 +439,14 @@
                     resultTitle.innerText = "Correo Fiable";
                     resultTitle.style.color = "var(--primary)";
                     resultDesc.innerText = "Nuestra IA ha analizado el remitente (" + email.email + ") y no ha encontrado reportes de estafa. Parece seguro.";
+                    isScamConfirmed = false;
                 } else {
                     resultIcon.innerText = "warning";
                     resultIcon.style.color = "var(--error)"; // Red
                     resultTitle.innerText = "¡Peligro! Posible Estafa";
                     resultTitle.style.color = "var(--error)";
                     resultDesc.innerText = "Cuidado. Hemos cruzado los datos de este remitente con múltiples bases de datos y hay un alto porcentaje de reportes por Phishing y fraude.";
+                    isScamConfirmed = true;
                 }
             }, 2500);
         });
@@ -429,7 +454,7 @@
         // Attach listeners to attachments and content links
         const attachCard = document.getElementById('dyn-attach-card');
         const btnDownload = document.getElementById('dyn-btn-download');
-        
+
         function handleAttachmentClick(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -438,7 +463,7 @@
                 console.log("Opening/Downloading attachment: " + email.attachmentName);
             });
         }
-        
+
         if (attachCard) attachCard.addEventListener('click', handleAttachmentClick);
         if (btnDownload) btnDownload.addEventListener('click', handleAttachmentClick);
 
@@ -454,6 +479,37 @@
             });
         }
 
+        function deleteCurrentEmail() {
+            let deletedIds = JSON.parse(localStorage.getItem('deletedEmails')) || [];
+            if (!deletedIds.includes(email.id)) {
+                deletedIds.push(email.id);
+                localStorage.setItem('deletedEmails', JSON.stringify(deletedIds));
+            }
+
+            // Replace layout grid
+            const layoutGrid = document.querySelector('.email-layout-grid');
+            if (layoutGrid) {
+                layoutGrid.innerHTML = `
+                <div class="deleted-notice" style="text-align: center; padding: 5rem 2rem; background-color: var(--surface-container-lowest); border-radius: 1.5rem; color: var(--error); border: 1px solid rgba(168, 56, 54, 0.2); grid-column: 1 / -1;">
+                    <span class="material-symbols-outlined" style="font-size: 5rem; margin-bottom: 1rem;">gpp_bad</span>
+                    <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">Correo Eliminado por Seguridad</h2>
+                    <p style="color: var(--on-surface-variant); font-size: 1.125rem;">Nuestros sistemas han determinado que este correo es una amenaza. Ha sido bloqueado y eliminado definitivamente de tu bandeja de entrada.</p>
+                    <button class="btn-action-primary" style="margin: 2rem auto 0 auto;" onclick="window.location.href='../correo/correo.html'">Volver al Inbox</button>
+                </div>
+                `;
+            }
+            const topActions = document.querySelector('.email-actions-top');
+            if (topActions) topActions.style.display = 'none';
+        }
+
+        // Check if already deleted on load
+        const deletedIds = JSON.parse(localStorage.getItem('deletedEmails')) || [];
+        if (deletedIds.includes(email.id)) {
+            // Already deleted! Run the UI replacement
+            deleteCurrentEmail();
+        }
+
     </script>
 </body>
+
 </html>
