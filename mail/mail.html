@@ -131,7 +131,7 @@
                         <!-- Attachments (Hidden by default, shown if hasAttachment) -->
                         <div class="msg-attachments-section" id="dyn-attachments" style="display: none;">
                             <h3 class="attachments-title">Attachments</h3>
-                            <div class="attachment-card">
+                            <div class="attachment-card" id="dyn-attach-card">
                                 <div class="attachment-icon-bg">
                                     <span class="material-symbols-outlined text-primary"
                                         id="dyn-attach-icon">picture_as_pdf</span>
@@ -140,7 +140,7 @@
                                     <p class="name" id="dyn-attach-name">Document.pdf</p>
                                     <p class="meta" id="dyn-attach-meta">0 MB</p>
                                 </div>
-                                <button class="btn-download">
+                                <button class="btn-download" id="dyn-btn-download">
                                     <span class="material-symbols-outlined" data-icon="download">download</span>
                                 </button>
                             </div>
@@ -218,6 +218,61 @@
         </div>
     </main>
 
+    <!-- Security Modal -->
+    <style>
+        @keyframes spin-hourglass {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hourglass-spin {
+            animation: spin-hourglass 1.5s linear infinite;
+        }
+    </style>
+    <div id="security-modal" class="modal-overlay" style="display: none;">
+        <div class="security-modal-content">
+            <h3 class="security-modal-title" style="margin-bottom: 1.5rem;">
+                <span class="material-symbols-outlined">warning</span> Security Check
+            </h3>
+            
+            <div id="sec-content-default">
+                <p class="security-modal-text">
+                    This email is marked as possible spam. To continue to the attachment or link, please verify the sender's email address by typing it below (Hint: check sender details).
+                </p>
+                <input type="email" id="sec-email-input" class="security-modal-input" placeholder="Sender's exact email address..." autocomplete="off"/>
+                <p id="sec-error-msg" class="security-modal-error">Incorrect email address. Please look at the sender details and try again.</p>
+                
+                <div class="security-modal-actions" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                    <button id="sec-btn-ai-check" class="btn-action-secondary" style="display: none; justify-content: center; width: 100%; border-color: var(--primary); color: var(--primary);">
+                        <span class="material-symbols-outlined" data-icon="robot_2">robot_2</span> Comprobar fiabilidad del correo
+                    </button>
+                    
+                    <div style="display: flex; gap: 1rem; width: 100%; justify-content: flex-end;">
+                        <button id="sec-btn-cancel" class="btn-action-secondary" style="padding: 0.5rem 1rem;">Cancel</button>
+                        <button id="sec-btn-verify" class="btn-action-primary" style="padding: 0.5rem 1rem;">Verify</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Checking State -->
+            <div id="sec-content-loading" style="display: none; text-align: center; padding: 2rem 0;">
+                <span class="material-symbols-outlined hourglass-spin" style="font-size: 3rem; color: var(--primary);">hourglass_empty</span>
+                <h4 style="margin-top: 1rem; color: var(--on-surface);">Analizando remitente...</h4>
+                <p style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.5rem;">Nuestra IA está buscando información o posibles reportes sobre este correo en la red.</p>
+            </div>
+
+            <!-- AI Result State -->
+            <div id="sec-content-result" style="display: none; text-align: center; padding: 1rem 0;">
+                <span id="sec-result-icon" class="material-symbols-outlined" style="font-size: 3.5rem;"></span>
+                <h4 id="sec-result-title" style="margin-top: 1rem; font-size: 1.25rem; font-weight: 800;"></h4>
+                <p id="sec-result-desc" style="color: var(--on-surface-variant); font-size: 0.875rem; margin-top: 0.5rem; line-height: 1.5;"></p>
+                <div style="margin-top: 1.5rem; justify-content: center; display: flex;">
+                    <button id="sec-btn-close-result" class="btn-action-secondary">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
     <script src="../emails.js"></script>
     <script>
         // Database of emails is now loaded from ../emails.js
@@ -279,7 +334,126 @@
         } else {
             reminderCard.style.display = "none";
         }
+
+        // Security check logic for Spam
+        const modal = document.getElementById('security-modal');
+        const inputField = document.getElementById('sec-email-input');
+        const errorMsg = document.getElementById('sec-error-msg');
+        
+        const contentDefault = document.getElementById('sec-content-default');
+        const contentLoading = document.getElementById('sec-content-loading');
+        const contentResult = document.getElementById('sec-content-result');
+        const btnAiCheck = document.getElementById('sec-btn-ai-check');
+        const resultIcon = document.getElementById('sec-result-icon');
+        const resultTitle = document.getElementById('sec-result-title');
+        const resultDesc = document.getElementById('sec-result-desc');
+
+        let pendingAction = null;
+
+        function showSecurityModal(actionCb) {
+            if (email.category !== 'spam') {
+                actionCb();
+                return;
+            }
+            pendingAction = actionCb;
+            errorMsg.style.display = 'none';
+            btnAiCheck.style.display = 'none';
+            inputField.value = '';
+            
+            contentDefault.style.display = 'block';
+            contentLoading.style.display = 'none';
+            contentResult.style.display = 'none';
+            
+            modal.style.display = 'flex';
+            setTimeout(() => inputField.focus(), 100);
+        }
+
+        function closeSecurityModal() {
+            modal.style.display = 'none';
+            pendingAction = null;
+        }
+
+        document.getElementById('sec-btn-close-result').addEventListener('click', closeSecurityModal);
+
+        function verifyEmail() {
+            const val = inputField.value.trim().toLowerCase();
+            const expected = email.email.trim().toLowerCase();
+            if (val === expected) {
+                // Success
+                closeSecurityModal();
+                if (pendingAction) {
+                    alert("Verification successful. Action continuing...");
+                    pendingAction();
+                }
+            } else {
+                // Error
+                errorMsg.style.display = 'block';
+                btnAiCheck.style.display = 'flex'; // Show AI button on error
+                inputField.focus();
+            }
+        }
+
+        document.getElementById('sec-btn-cancel').addEventListener('click', closeSecurityModal);
+        document.getElementById('sec-btn-verify').addEventListener('click', verifyEmail);
+        inputField.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') verifyEmail();
+        });
+
+        // AI Verification Logic
+        btnAiCheck.addEventListener('click', () => {
+            contentDefault.style.display = 'none';
+            contentLoading.style.display = 'block';
+            
+            // Simulate 2s loading
+            setTimeout(() => {
+                contentLoading.style.display = 'none';
+                contentResult.style.display = 'block';
+                
+                const isReliable = Math.random() > 0.5; // 50% chance
+                if (isReliable) {
+                    resultIcon.innerText = "check_circle";
+                    resultIcon.style.color = "var(--primary)"; // Blue/Green
+                    resultTitle.innerText = "Correo Fiable";
+                    resultTitle.style.color = "var(--primary)";
+                    resultDesc.innerText = "Nuestra IA ha analizado el remitente (" + email.email + ") y no ha encontrado reportes de estafa. Parece seguro.";
+                } else {
+                    resultIcon.innerText = "warning";
+                    resultIcon.style.color = "var(--error)"; // Red
+                    resultTitle.innerText = "¡Peligro! Posible Estafa";
+                    resultTitle.style.color = "var(--error)";
+                    resultDesc.innerText = "Cuidado. Hemos cruzado los datos de este remitente con múltiples bases de datos y hay un alto porcentaje de reportes por Phishing y fraude.";
+                }
+            }, 2500);
+        });
+
+        // Attach listeners to attachments and content links
+        const attachCard = document.getElementById('dyn-attach-card');
+        const btnDownload = document.getElementById('dyn-btn-download');
+        
+        function handleAttachmentClick(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            showSecurityModal(() => {
+                // Mock action
+                console.log("Opening/Downloading attachment: " + email.attachmentName);
+            });
+        }
+        
+        if (attachCard) attachCard.addEventListener('click', handleAttachmentClick);
+        if (btnDownload) btnDownload.addEventListener('click', handleAttachmentClick);
+
+        const dynContent = document.getElementById('dyn-content');
+        if (dynContent) {
+            dynContent.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A' || e.target.closest('a')) {
+                    e.preventDefault();
+                    showSecurityModal(() => {
+                        console.log("Navigating to link");
+                    });
+                }
+            });
+        }
+
     </script>
 </body>
-
 </html>
