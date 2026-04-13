@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Inbox - Lumina Corporate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body class="app-body">
+    <!-- Replicated Sidebar from Index.html -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h1 class="sidebar-title">Editorial Intranet</h1>
+            <p class="sidebar-subtitle">Curated Workspace</p>
+        </div>
+        <button class="btn-primary create-new-btn">
+            <span class="material-symbols-outlined icon-lg" data-icon="add">add</span>
+            Create New
+        </button>
+        <nav class="sidebar-nav">
+            <a class="nav-item" href="../index.html">
+                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+            <a class="nav-item active" href="#">
+                <span class="material-symbols-outlined" data-icon="inbox">inbox</span>
+                Inbox
+            </a>
+            <a class="nav-item" href="#">
+                <span class="material-symbols-outlined" data-icon="contacts">contacts</span>
+                Directory
+            </a>
+            <a class="nav-item" href="#">
+                <span class="material-symbols-outlined" data-icon="description">description</span>
+                Documents
+            </a>
+            <a class="nav-item" href="#">
+                <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+        </nav>
+        <div class="user-profile">
+            <img alt="User avatar" class="avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtiCOV6AzNUVAUbJzEdHBlDRCj0l8z_i4AZIwr-oJ2hXpbkVsf3NqQfIBwWATcQrbmwes88GIip0DlL3jJTJl8RuUfvz13I4X3SDzuGjOaC8NJ27ke4d6p6rf_M4X1PGV4bhLogg1d7z-jaf42Q6BzkY4ug6fnDWxmbZoCXM33_fKVDTn1euzxC1j18Db9_7I7WNFEuqntXe9fK56DTxVSDaD3gJbeUZoHLv27x72VVotAqCkxoff_di56wrrnSJSisg6lbN_yqNE" />
+            <div class="user-info">
+                <p class="user-name">Sarah Jenkins</p>
+                <p class="user-role">Lead Editor</p>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <!-- Replicated TopAppBar from Index.html -->
+        <header class="top-nav">
+            <div class="breadcrumbs">
+                <span class="breadcrumb-item">Directory</span>
+                <span class="breadcrumb-separator"></span>
+                <span class="breadcrumb-current">Inbox</span>
+            </div>
+            <div class="top-nav-actions">
+                <div class="search-bar-wrapper">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input class="search-input" placeholder="Search communications..." type="text" />
+                </div>
+                <div class="nav-icons">
+                    <button class="icon-btn">
+                        <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                    </button>
+                    <button class="icon-btn">
+                        <span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Inbox Canvas -->
+        <div class="inbox-canvas">
+            <div class="inbox-container">
+                <!-- Welcome Section -->
+                <header class="inbox-banner">
+                    <div>
+                        <h1 class="inbox-title">Workspace Inbox</h1>
+                        <p class="inbox-subtitle">You have <span class="text-primary unread-count">4 unread</span> messages from your team.</p>
+                    </div>
+                </header>
+
+                <!-- Filter Tabs -->
+                <div class="filter-tabs">
+                    <button class="filter-tab">All Messages</button>
+                    <button class="filter-tab active">Coworkers</button>
+                    <button class="filter-tab">External Companies</button>
+                    <button class="filter-tab">Possible Spam</button>
+                </div>
+
+                <!-- Bento Style Message List -->
+                <div class="message-list-full">
+                    <!-- Message Item 1 -->
+                    <div class="msg-card">
+                        <div class="message-inner">
+                            <img class="message-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-rpmWiIp6jp_m8qZdznN7HP2JJ6E_grj9waMMOzusH_19Q1-E2tClSpNJhy9axiIXmlouCcv0CY18xUjTRi61QeuIo6WTUsPDBTnKUAkNzVRaRAijVW1U0u2lt3Gh1swzG9dmY53uTr5fkxjmB-bHp_F-ojE0xS-4mxKuSFkOhTwui8ngK9VNS2KJmE5-HOh-3zmTPYoP6mO0Jr7bvgNKZkn35ZG4si08-ZTngKHYXw8CS9gX5ZJU3UY7fWlw_4GwPPNjCl4B9mfC" />
+                            <div class="message-details">
+                                <div class="msg-header">
+                                    <div class="msg-meta-left">
+                                        <h3 class="msg-sender">Marcus Aurelius</h3>
+                                        <span class="msg-badge badge-marketing">Marketing</span>
+                                    </div>
+                                    <span class="msg-time">09:42 AM</span>
+                                </div>
+                                <h4 class="msg-subject unread">Finalizing the Q4 Strategy Document</h4>
+                                <p class="msg-snippet">I've attached the latest drafts for the creative direction. We need to review the budget allocation for the social media campaigns before the...</p>
+                                <div class="msg-attachments">
+                                    <div class="attachment-pill">
+                                        <span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+                                        <span>Strategy_Deck_V2.pdf</span>
+                                    </div>
+                                    <div class="time-pill">
+                                        <span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+                                        <span>Due in 2h</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Item 2 -->
+                    <div class="msg-card">
+                        <div class="message-inner">
+                            <img class="message-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO9QlISuTz-44RtbjwMYK-CN0bPoQgG4bvVrHLDqul5a2QpKNMMDySzW0-vm3jCbcYEvJeADg3haa4sckUra9ifaC4KrimcbAONTH_-J-WRp9F5oElpiLs7l7TT1e1eTMzyoYUtDuwaZV_IBIClfhVZ4XiIGYUVjO32maSRdPRTIP52ZoIzp-jOuOHYrHuzIAD4tnxcYhecuTVGhyVd8ztYLZyNsPcrZne9CDWeGju_LfKf1R1rDB2L8XvEQxJmYXsF2pcBSUUo94k" />
+                            <div class="message-details">
+                                <div class="msg-header">
+                                    <div class="msg-meta-left">
+                                        <h3 class="msg-sender">Sarah Lansing</h3>
+                                        <span class="msg-badge badge-hr">Human Resources</span>
+                                    </div>
+                                    <span class="msg-time">Yesterday, 4:20 PM</span>
+                                </div>
+                                <h4 class="msg-subject">Quarterly Performance Review Schedule</h4>
+                                <p class="msg-snippet">Hi everyone, please make sure you've filled out your self-assessment forms by the end of the week. Link is in the portal under employees...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Item 3 -->
+                    <div class="msg-card">
+                        <div class="message-inner">
+                            <img class="message-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxTODB3vbEHrtscLkbI2-NCsZjazqmxzL-Vzh9P3HQSXmcvCYDSFUiDpM_58DM4RkmzxUKi0Bcl78eY1SNZIu1JXClehKIiVlC39oI1xwFI7ID21b56hUe38I_nIRLjyme-QERJmv8RoRERBAxUMhyLEyYuZNNV2mdRKppX7ndZPc-mzbR7iBuJUepUL7Edo-qLbJTC_VQXqpf7dmXnd8KeRQDARxXiqHuYVix16D3Eyg3b0bfOOFa6BAqXRRmTMBntdOgoJIBalJD" />
+                            <div class="message-details">
+                                <div class="msg-header">
+                                    <div class="msg-meta-left">
+                                        <h3 class="msg-sender">David Kim</h3>
+                                        <span class="msg-badge badge-eng">Engineering</span>
+                                    </div>
+                                    <span class="msg-time">Oct 24</span>
+                                </div>
+                                <h4 class="msg-subject unread">Security patch deployed to staging</h4>
+                                <p class="msg-snippet">The critical vulnerability identified in the auth module has been addressed. Please test your respective modules in the staging environment before midnight.</p>
+                                <div class="msg-attachments">
+                                    <div class="priority-pill">
+                                        <span class="material-symbols-outlined" data-icon="priority_high">priority_high</span>
+                                        <span>Critical Priority</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Item 4 -->
+                    <div class="msg-card">
+                        <div class="message-inner">
+                            <img class="message-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgW0f9gVDGOMZiis5aC8ND4ibh2PG8DqvI2fQGSpD6Irka1BfQx3o-N80Y_hMjX6DEMUOGLjQjYoHhKDkHa1rYZ7PgbSalz3Oe_dh3HIxW1Uv4FqRRy7ZogM5bOkvJnNb8nGDjwQ_V139kPnupUxG0U2Xp7o_ZDEr3z6Cd0BH2mWfQNjjmo0-fZx2ENp9fg4eHrpRtTBbA67VeB28qJ5wxzXDQmEdAOruuTCKqEnOrrol1vBdoRcYKk3CNQjD2oMFiCZiXbjvhAhTJ" />
+                            <div class="message-details">
+                                <div class="msg-header">
+                                    <div class="msg-meta-left">
+                                        <h3 class="msg-sender">Jane Thompson</h3>
+                                        <span class="msg-badge badge-ops">Operations</span>
+                                    </div>
+                                    <span class="msg-time">Oct 23</span>
+                                </div>
+                                <h4 class="msg-subject">Office renovation update for next week</h4>
+                                <p class="msg-snippet">Floor 4 will be partially inaccessible starting Monday morning. Please check the seating plan attached to see where your temporary workstation will be located.</p>
+                                <div class="msg-attachments">
+                                    <div class="attachment-pill">
+                                        <span class="material-symbols-outlined" data-icon="map">map</span>
+                                        <span>Seating_Plan_Floor4.pdf</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Pagination / More Stats -->
+                <div class="stats-grid" style="margin-top: 2rem;">
+                    <div class="clean-inbox-banner">
+                        <div class="clean-text-wrap">
+                            <h3 class="clean-inbox-title">Clean up your inbox?</h3>
+                            <p class="clean-inbox-desc">Archive messages from over 30 days ago to keep your workspace fresh and focused.</p>
+                        </div>
+                        <button class="btn-secondary">Auto-Archive</button>
+                    </div>
+                    <div class="resolved-stat-box">
+                        <div class="resolved-icon">
+                            <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                        </div>
+                        <div class="resolved-number">128</div>
+                        <div class="resolved-label">Tasks Resolved</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button class="fab-btn">
+        <span class="material-symbols-outlined" data-icon="edit">edit</span>
+    </button>
+</body>
+</html>
