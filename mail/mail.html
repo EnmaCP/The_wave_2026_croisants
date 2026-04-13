@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Email Detail - Editorial Intranet</title>
+    <!-- Fonts && Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <!-- Global Styles & Custom Styles -->
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="mail.css" />
+</head>
+
+<body class="app-body">
+    <!-- Replicated Sidebar from Index.html -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h1 class="sidebar-title">The Workspace</h1>
+            <p class="sidebar-subtitle">Editorial Hub</p>
+        </div>
+        <button class="btn-primary create-new-btn">
+            <span class="material-symbols-outlined icon-lg" data-icon="edit">edit</span>
+            Compose Email
+        </button>
+        <nav class="sidebar-nav">
+            <a class="nav-item" href="../index.html">
+                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span> Dashboard
+            </a>
+            <a class="nav-item active" href="#">
+                <span class="material-symbols-outlined" data-icon="mail">mail</span> Communications
+            </a>
+            <a class="nav-item" href="#">
+                <span class="material-symbols-outlined" data-icon="contacts">contacts</span> Directory
+            </a>
+            <a class="nav-item" href="#">
+                <span class="material-symbols-outlined" data-icon="library_books">library_books</span> Resources
+            </a>
+            <a class="nav-item" href="#">
+                <span class="material-symbols-outlined" data-icon="help_center">help_center</span> Support
+            </a>
+        </nav>
+        <div class="user-profile" style="border-top: none; padding-top: 1rem; border-top: 1px solid rgba(226, 232, 240, 0.15);">
+             <a class="nav-item" href="#" style="width: 100%;">
+                <span class="material-symbols-outlined" data-icon="logout">logout</span> Logout
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <!-- Replicated TopAppBar from Index.html -->
+        <header class="top-nav">
+            <div class="breadcrumbs">
+                <span class="breadcrumb-item">Editorial Intranet</span>
+            </div>
+            <div class="top-nav-actions">
+                <div class="nav-icons" style="gap: 1.5rem; margin-right: 2rem;">
+                    <a class="icon-btn" href="#" style="font-size: 0.875rem;">Inbox</a>
+                    <a class="icon-btn" href="#" style="font-size: 0.875rem;">Drafts</a>
+                    <a class="icon-btn" href="#" style="font-size: 0.875rem;">Sent</a>
+                    <a class="icon-btn" href="#" style="font-size: 0.875rem;">Archive</a>
+                </div>
+                <div class="nav-icons">
+                    <button class="icon-btn">
+                        <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                    </button>
+                    <button class="icon-btn">
+                        <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    </button>
+                    <img alt="User profile" class="avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtJlz9mddIE6LSpdaN5lZsjkR8mqotq88nvnmIz87Rj9IQHHNJNiRvPJ0HgIetEZKpWs2C9DRDmTWkADLM0853aFLjsK_3mw98butLJ2u4pFT2AvhQlwx0UiwWwE4wBO0Jr3rTOhgvMfuo6W1XUcBiuyOy9eHSzoajpdtVPUscMOPR2sWuIjtIQJCh745ZDu_I4-tz7jKPTzc9cDjnWPz9h_vUuQkh0gHR1RZVEH3uQET-S1HfOXIftg4lRiwv7xQl90TLrtAC8RLN" style="border: 2px solid var(--primary-container);" />
+                </div>
+            </div>
+        </header>
+
+        <div class="email-detail-canvas">
+            <!-- Editorial Header / Breadcrumb -->
+            <div class="email-page-header">
+                <div>
+                    <nav class="email-breadcrumb">
+                        <span>Communications</span>
+                        <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+                        <a href="../correo/correo.html" style="color: inherit; text-decoration: none;">Inbox</a>
+                        <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+                        <span style="color: var(--on-surface-variant)">Email Detail</span>
+                    </nav>
+                    <h1 class="email-title" id="dyn-subject">Loading...</h1>
+                </div>
+                <div class="email-actions-top">
+                    <button class="btn-icon">
+                        <span class="material-symbols-outlined" data-icon="print">print</span>
+                    </button>
+                    <button class="btn-icon">
+                        <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Email Content (Bento Style) -->
+            <div class="email-layout-grid">
+                <!-- Left: Email Body & Conversation -->
+                <div class="email-main-column">
+                    <!-- Sender Identity Card -->
+                    <div class="sender-mini-card">
+                        <img alt="Sender Avatar" class="sender-avatar" id="dyn-mini-avatar" src="" />
+                        <div class="sender-mini-info">
+                            <div class="sender-mini-header">
+                                <p class="sender-mini-name" id="dyn-mini-name"></p>
+                                <span class="badge" id="dyn-mini-badge"></span>
+                            </div>
+                            <p class="sender-mini-meta" id="dyn-mini-meta"></p>
+                        </div>
+                        <button class="btn-star">
+                            <span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </button>
+                    </div>
+
+                    <!-- Message Body -->
+                    <div class="msg-body-container">
+                        <div class="msg-content" id="dyn-content">
+                            <!-- Dynamic Content -->
+                        </div>
+
+                        <!-- Attachments (Hidden by default, shown if hasAttachment) -->
+                        <div class="msg-attachments-section" id="dyn-attachments" style="display: none;">
+                            <h3 class="attachments-title">Attachments</h3>
+                            <div class="attachment-card">
+                                <div class="attachment-icon-bg">
+                                    <span class="material-symbols-outlined text-primary" id="dyn-attach-icon">picture_as_pdf</span>
+                                </div>
+                                <div class="attachment-info">
+                                    <p class="name" id="dyn-attach-name">Document.pdf</p>
+                                    <p class="meta" id="dyn-attach-meta">0 MB</p>
+                                </div>
+                                <button class="btn-download">
+                                    <span class="material-symbols-outlined" data-icon="download">download</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="action-buttons-group">
+                        <button class="btn-action-primary">
+                            <span class="material-symbols-outlined" data-icon="reply">reply</span> Reply
+                        </button>
+                        <button class="btn-action-secondary">
+                            <span class="material-symbols-outlined" data-icon="forward">forward</span> Forward
+                        </button>
+                        <button class="btn-action-danger">
+                            <span class="material-symbols-outlined" data-icon="archive">archive</span> Archive
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Contextual Info -->
+                <div class="email-side-column">
+                    <!-- Contact Quick Card -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-card-title">Sender Details</h3>
+                        <div class="sender-detailed-header">
+                            <img alt="Sender Large Avatar" class="sender-large-avatar" id="dyn-large-avatar" src="" />
+                            <h2 class="sender-detailed-name" id="dyn-large-name"></h2>
+                            <p class="sender-detailed-role" id="dyn-large-role"></p>
+                            <div class="contact-quick-actions">
+                                <button class="contact-btn"><span class="material-symbols-outlined" data-icon="chat">chat</span></button>
+                                <button class="contact-btn"><span class="material-symbols-outlined" data-icon="call">call</span></button>
+                                <button class="contact-btn"><span class="material-symbols-outlined" data-icon="videocam">videocam</span></button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="info-block">
+                                <p class="info-block-label">Local Time</p>
+                                <p class="info-block-value" id="dyn-full-time"></p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-block-label">Recent Threads</p>
+                                <ul class="threads-list">
+                                    <li class="thread-item">
+                                        <span class="thread-dot active"></span> Q3 Retrospective Review
+                                    </li>
+                                    <li class="thread-item">
+                                        <span class="thread-dot inactive"></span> Branding Assets Update
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags & Metadata Card -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-card-title">Metadata</h3>
+                        <div class="metadata-tags-container" id="dyn-tags-container">
+                            <!-- Dynamic tags -->
+                        </div>
+                        <div class="calendar-reminder" id="dyn-reminder" style="display: none;">
+                            <p class="calendar-reminder-header">
+                                <span class="material-symbols-outlined" data-icon="event">event</span> Calendar Reminder
+                            </p>
+                            <p class="calendar-reminder-text" id="dyn-reminder-text">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation (Mobile Only) -->
+    <nav class="mobile-nav">
+        <button class="mobile-nav-btn">
+            <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+            <span class="mobile-nav-label">Home</span>
+        </button>
+        <button class="mobile-nav-btn active">
+            <span class="material-symbols-outlined" data-icon="mail" data-weight="fill" style="font-variation-settings: 'FILL' 1;">mail</span>
+            <span class="mobile-nav-label">Inbox</span>
+        </button>
+        <button class="fab-center">
+            <span class="material-symbols-outlined" data-icon="add">add</span>
+        </button>
+        <button class="mobile-nav-btn">
+            <span class="material-symbols-outlined" data-icon="contacts">contacts</span>
+            <span class="mobile-nav-label">People</span>
+        </button>
+        <button class="mobile-nav-btn">
+            <span class="material-symbols-outlined" data-icon="settings">settings</span>
+            <span class="mobile-nav-label">More</span>
+        </button>
+    </nav>
+    
+    <script>
+        // Database of emails derived from correo.html
+        const emails = [
+            {
+                id: 1,
+                sender: "Marcus Aurelius",
+                role: "Director of Marketing",
+                badge: "Marketing",
+                badgeClass: "badge-marketing",
+                subject: "Finalizing the Q4 Strategy Document",
+                time: "10:42 AM",
+                fullTime: "London, UK • 10:42 AM",
+                email: "marcus.a@editorial-workspace.com",
+                avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuD23x6sxf2mZqn1_ajz5z_I6LhZjy-EKIwAppXx3EkPOKyTlJR0GwRgjh9BfhVzaKe5yRQBRPSldUdaU1ygz6SNnKJzPCnyldQU5_wisBnURt0aJXWwkDp5RoOTCBogjre2AAYQr-njldTNMwrJBFT6GPQuiNKXSyUqGxc1zCofHid5wQYnjM16ZyeMGTXil1lZn9v-LMUSPU6kawb9FDEtHyE6Nw5KCXQ_AnWLZmTAR9aj7faVYCQrVDvcYkSk3u3QKPrMG5HE0FVo",
+                largeAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuAZZv8wqVwF5p9nuPLguU4R9eDgr5F6teQ8khEaJh9gpCHi0nbT0D8L4mTc4_J2sUVty0-gikV-vxW-CS-ui13Kp_d195FXqbv4M52jdDhQxUYWbw5SKaE4m6LALx_99zN3HnOwE0hepOh6S-xXFBTAfkSVxj9jiA1AKKl-5PfGJq3wDcUUU3MoS3Y-udakzqDedc5TQDhkihcZG77ul0WecHwPyjt2e4WtBDUSBx3eDplxo6_X1kzrKIxvHAOgM70dMxhc--GwM1ET",
+                content: `<p>Hi Team,</p><p>I’ve just finished a walkthrough of the latest projections for the final quarter. As we move into the execution phase, I’d like to focus our discussion on two critical pillars: <strong>budget allocation</strong> across our digital channels and the overall <strong>creative direction</strong> for the holiday campaign.</p><div class="msg-callout"><h4 class="msg-callout-title"><span class="material-symbols-outlined" data-icon="info">info</span>Strategic Priority</h4><p class="msg-callout-text">"We need to ensure the messaging resonates with our core audience's shift toward sustainability while maintaining the premium editorial feel that defines our brand."</p></div><p>The attached PDF contains the updated V2 deck. Please review the slides regarding the paid media split. I’ve increased the weighting towards video storytelling, as our engagement metrics indicate a significant uplift in that area over the last 30 days.</p><p>Let’s aim to finalize these numbers by end of day Thursday so we can brief the creative studio on Friday morning.</p><p class="msg-signature">Best regards,<br /><span style="font-weight: 700; color: var(--primary);">Marcus Aurelius</span><br /><span style="font-size: 0.875rem; color: var(--on-surface-variant);">Director of Marketing &amp; Creative</span></p>`,
+                hasAttachment: true,
+                attachmentIcon: "picture_as_pdf",
+                attachmentName: "Strategy_Deck_V2.pdf",
+                attachmentMeta: "4.2 MB • Updated 2h ago",
+                tags: ["Q4 Strategy", "Budget", "Marketing", "Urgent"],
+                reminder: "Review deadline is Thursday, Oct 24, 5:00 PM."
+            },
+            {
+                id: 2,
+                sender: "Sarah Lansing",
+                role: "HR Manager",
+                badge: "Human Resources",
+                badgeClass: "badge-hr",
+                subject: "Quarterly Performance Review Schedule",
+                time: "Yesterday, 4:20 PM",
+                fullTime: "New York, US • Yesterday",
+                email: "sarah.l@editorial-workspace.com",
+                avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuAO9QlISuTz-44RtbjwMYK-CN0bPoQgG4bvVrHLDqul5a2QpKNMMDySzW0-vm3jCbcYEvJeADg3haa4sckUra9ifaC4KrimcbAONTH_-J-WRp9F5oElpiLs7l7TT1e1eTMzyoYUtDuwaZV_IBIClfhVZ4XiIGYUVjO32maSRdPRTIP52ZoIzp-jOuOHYrHuzIAD4tnxcYhecuTVGhyVd8ztYLZyNsPcrZne9CDWeGju_LfKf1R1rDB2L8XvEQxJmYXsF2pcBSUUo94k",
+                largeAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuAO9QlISuTz-44RtbjwMYK-CN0bPoQgG4bvVrHLDqul5a2QpKNMMDySzW0-vm3jCbcYEvJeADg3haa4sckUra9ifaC4KrimcbAONTH_-J-WRp9F5oElpiLs7l7TT1e1eTMzyoYUtDuwaZV_IBIClfhVZ4XiIGYUVjO32maSRdPRTIP52ZoIzp-jOuOHYrHuzIAD4tnxcYhecuTVGhyVd8ztYLZyNsPcrZne9CDWeGju_LfKf1R1rDB2L8XvEQxJmYXsF2pcBSUUo94k",
+                content: `<p>Hi everyone,</p><p>Please make sure you've filled out your self-assessment forms by the end of the week. Link is in the portal under employees. We want to make sure everyone has enough time to address their goals and accomplishments from the last quarter before we set up individual 1-on-1s.</p><p class="msg-signature">Thanks,<br /><span style="font-weight: 700; color: var(--primary);">Sarah Lansing</span><br /></p>`,
+                hasAttachment: false,
+                tags: ["HR", "Reviews", "Mandatory"],
+                reminder: "Self-assessment due this Friday."
+            },
+            {
+                id: 3,
+                sender: "David Kim",
+                role: "Lead Engineer",
+                badge: "Engineering",
+                badgeClass: "badge-eng",
+                subject: "Security patch deployed to staging",
+                time: "Oct 24",
+                fullTime: "San Francisco, US • Oct 24",
+                email: "david.k@editorial-workspace.com",
+                avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCxTODB3vbEHrtscLkbI2-NCsZjazqmxzL-Vzh9P3HQSXmcvCYDSFUiDpM_58DM4RkmzxUKi0Bcl78eY1SNZIu1JXClehKIiVlC39oI1xwFI7ID21b56hUe38I_nIRLjyme-QERJmv8RoRERBAxUMhyLEyYuZNNV2mdRKppX7ndZPc-mzbR7iBuJUepUL7Edo-qLbJTC_VQXqpf7dmXnd8KeRQDARxXiqHuYVix16D3Eyg3b0bfOOFa6BAqXRRmTMBntdOgoJIBalJD",
+                largeAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCxTODB3vbEHrtscLkbI2-NCsZjazqmxzL-Vzh9P3HQSXmcvCYDSFUiDpM_58DM4RkmzxUKi0Bcl78eY1SNZIu1JXClehKIiVlC39oI1xwFI7ID21b56hUe38I_nIRLjyme-QERJmv8RoRERBAxUMhyLEyYuZNNV2mdRKppX7ndZPc-mzbR7iBuJUepUL7Edo-qLbJTC_VQXqpf7dmXnd8KeRQDARxXiqHuYVix16D3Eyg3b0bfOOFa6BAqXRRmTMBntdOgoJIBalJD",
+                content: `<p>Team,</p><p>The critical vulnerability identified in the auth module has been addressed. Please test your respective modules in the staging environment before midnight. The deployment to production is planned for tomorrow morning.</p><div class="msg-callout" style="background-color: rgba(250, 116, 111, 0.1); border-left-color: var(--error);"><h4 class="msg-callout-title" style="color: var(--error);"><span class="material-symbols-outlined" data-icon="warning">warning</span>Critical Priority</h4><p class="msg-callout-text" style="color: #6e0a12;">"Any modules failing tests in staging will delay the production release."</p></div><p class="msg-signature">Best,<br /><span style="font-weight: 700; color: var(--primary);">David Kim</span><br /></p>`,
+                hasAttachment: false,
+                tags: ["Security", "Staging", "Deployment", "Urgent"],
+                reminder: "Test staging environment by midnight."
+            },
+            {
+                id: 4,
+                sender: "Jane Thompson",
+                role: "Head of Operations",
+                badge: "Operations",
+                badgeClass: "badge-ops",
+                subject: "Office renovation update for next week",
+                time: "Oct 23",
+                fullTime: "London, UK • Oct 23",
+                email: "jane.t@editorial-workspace.com",
+                avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBgW0f9gVDGOMZiis5aC8ND4ibh2PG8DqvI2fQGSpD6Irka1BfQx3o-N80Y_hMjX6DEMUOGLjQjYoHhKDkHa1rYZ7PgbSalz3Oe_dh3HIxW1Uv4FqRRy7ZogM5bOkvJnNb8nGDjwQ_V139kPnupUxG0U2Xp7o_ZDEr3z6Cd0BH2mWfQNjjmo0-fZx2ENp9fg4eHrpRtTBbA67VeB28qJ5wxzXDQmEdAOruuTCKqEnOrrol1vBdoRcYKk3CNQjD2oMFiCZiXbjvhAhTJ",
+                largeAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBgW0f9gVDGOMZiis5aC8ND4ibh2PG8DqvI2fQGSpD6Irka1BfQx3o-N80Y_hMjX6DEMUOGLjQjYoHhKDkHa1rYZ7PgbSalz3Oe_dh3HIxW1Uv4FqRRy7ZogM5bOkvJnNb8nGDjwQ_V139kPnupUxG0U2Xp7o_ZDEr3z6Cd0BH2mWfQNjjmo0-fZx2ENp9fg4eHrpRtTBbA67VeB28qJ5wxzXDQmEdAOruuTCKqEnOrrol1vBdoRcYKk3CNQjD2oMFiCZiXbjvhAhTJ",
+                content: `<p>Hello,</p><p>Floor 4 will be partially inaccessible starting Monday morning due to the new layout plan implementation. Please check the seating plan attached to see where your temporary workstation will be located during the week.</p><p class="msg-signature">Thanks for your patience,<br /><span style="font-weight: 700; color: var(--primary);">Jane Thompson</span><br /></p>`,
+                hasAttachment: true,
+                attachmentIcon: "map",
+                attachmentName: "Seating_Plan_Floor4.pdf",
+                attachmentMeta: "1.8 MB",
+                tags: ["Operations", "Office", "Facilities"],
+                reminder: "Check temporary workstation assignment."
+            }
+        ];
+
+        // Read the "id" from the query params, default to 1
+        const urlParams = new URLSearchParams(window.location.search);
+        const emailId = parseInt(urlParams.get('id')) || 1;
+        
+        // Find the matching email or fallback to the first one
+        const email = emails.find(e => e.id === emailId) || emails[0];
+
+        // Populate DOM Elements
+        document.getElementById('dyn-subject').innerText = email.subject;
+        document.title = email.subject + " - Editorial Intranet";
+
+        // Mini Sender Card
+        document.getElementById('dyn-mini-avatar').src = email.avatar;
+        document.getElementById('dyn-mini-name').innerText = email.sender;
+        const miniBadge = document.getElementById('dyn-mini-badge');
+        miniBadge.className = "badge " + email.badgeClass;
+        miniBadge.innerText = email.badge;
+        document.getElementById('dyn-mini-meta').innerText = email.email + " • " + email.time;
+
+        // Content
+        document.getElementById('dyn-content').innerHTML = email.content;
+
+        // Attachments
+        const attachmentsSection = document.getElementById('dyn-attachments');
+        if (email.hasAttachment) {
+            attachmentsSection.style.display = "block";
+            document.getElementById('dyn-attach-icon').innerText = email.attachmentIcon;
+            document.getElementById('dyn-attach-name').innerText = email.attachmentName;
+            document.getElementById('dyn-attach-meta').innerText = email.attachmentMeta;
+        } else {
+            attachmentsSection.style.display = "none";
+        }
+
+        // Detailed Right Column
+        document.getElementById('dyn-large-avatar').src = email.largeAvatar;
+        document.getElementById('dyn-large-name').innerText = email.sender;
+        document.getElementById('dyn-large-role').innerText = email.role;
+        document.getElementById('dyn-full-time').innerText = email.fullTime;
+
+        // Tags
+        const tagsContainer = document.getElementById('dyn-tags-container');
+        tagsContainer.innerHTML = '';
+        email.tags.forEach(t => {
+            const span = document.createElement('span');
+            span.className = 'tag-pill';
+            span.innerText = t;
+            tagsContainer.appendChild(span);
+        });
+
+        // Reminders
+        const reminderCard = document.getElementById('dyn-reminder');
+        if (email.reminder) {
+            reminderCard.style.display = "block";
+            document.getElementById('dyn-reminder-text').innerText = email.reminder;
+        } else {
+            reminderCard.style.display = "none";
+        }
+    </script>
+</body>
+</html>
