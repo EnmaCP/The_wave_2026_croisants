@@ -191,16 +191,26 @@
             unreadCountBadge.style.display = unreadCount > 0 ? 'inline-block' : 'none';
         }
 
-        // Initialize with default filter "Coworkers" (as requested or based on previous default, let's use all to show everything first, or map it properly)
-        // Wait, the prompt says previously "Coworkers" was active. Let's initialize based on the active tab
-        
+        // Check for saved filter in sessionStorage
         const filterTabs = document.querySelectorAll('.filter-tab');
+        const savedTabName = sessionStorage.getItem('activeFilterTab');
+        if (savedTabName) {
+            filterTabs.forEach(tab => {
+                if (tab.textContent.trim() === savedTabName) {
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                }
+            });
+        }
+
         filterTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 filterTabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 
                 const tabText = tab.textContent.trim();
+                sessionStorage.setItem('activeFilterTab', tabText);
+                
                 let category = 'all';
                 if (tabText === "Coworkers") category = 'coworker';
                 else if (tabText === "External Companies") category = 'external';
@@ -214,7 +224,8 @@
         const activeTab = document.querySelector('.filter-tab.active').textContent.trim();
         let initialCategory = 'all';
         if (activeTab === "Coworkers") initialCategory = 'coworker';
-        else initialCategory = 'all'; // Default to all if not matched, or maybe we should default to 'all' and make "All Messages" active
+        else if (activeTab === "External Companies") initialCategory = 'external';
+        else if (activeTab === "Possible Spam") initialCategory = 'spam';
         
         renderMessages(initialCategory);
     </script>
